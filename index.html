@@ -9,6 +9,57 @@
     <link rel="stylesheet" type="text/css" href="./index.css">
   </head>
   <body>
-    <script></script>
+
+    <canvas class="area"></canvas>
+
+    <script>
+      const canvas = document.querySelector('.area');
+      const context = canvas.getContext("2d");
+
+      const cell = 20;
+      const count_x = 15;
+      const count_y = 15;
+
+      const canvas_width = count_x * cell;
+      const canvas_height = count_y * cell;
+
+      let context_x = 0;
+      let context_y = (count_y - 1) * cell;
+
+      canvas.width = canvas_width;
+      canvas.height = canvas_height
+
+      function draw(){
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillRect(context_x, context_y, cell, cell);
+      };
+
+      draw();
+
+      document.addEventListener('keydown', (event) => {
+        if(event.key === 'ArrowRight' && context_x < canvas_width - cell){
+          context_x += cell;
+          draw();
+        } else if(event.key === 'ArrowLeft' && context_x > 0) {
+          context_x -= cell;
+          draw();
+        }
+      })
+    </script>
   </body>
 </html>
+
+<!--
+TODOS
+
+x 物を置いてキーボードで左右に動かしてみる
+  x 右矢印1回押すとalertを表示する
+  x canvasに四角を表示してみる
+  x 右矢印1回押すと1マス横に移動
+  x canvasから飛び出さないようにする
+
+- ランダムに時間経過で障害物を移動する
+
+- 障害物に当たるとゲームオーバー
+
+-->
